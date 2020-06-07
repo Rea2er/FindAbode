@@ -58,7 +58,7 @@ class SignUp extends Component {
     const { username, email, password } = this.state
 
     if (this.formValid(this.state)) {
-      await axios.get(__dirname + '/signup/' + email)
+      await axios.get('http://a2-ruize-nie.herokuapp.com/signup/' + email)
         .then(res => {
           if (res.data.length !== 0) {
             this.setState({
@@ -82,7 +82,7 @@ class SignUp extends Component {
         username, email, password
       }
 
-      axios.post(__dirname + '/signup', user)
+      axios.post('http://a2-ruize-nie.herokuapp.com/signup', user)
         .then(res => console.log(res.data));
 
       this.setState({
