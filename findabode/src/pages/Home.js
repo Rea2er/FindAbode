@@ -14,6 +14,7 @@ class Home extends Component {
     return (
       <>
         <Navbar auth={this.props.location.state} />
+        {console.log(this.props.location.state)}
         <Header />
         <Service />
         <Process />

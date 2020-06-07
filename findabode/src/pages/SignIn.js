@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
@@ -6,17 +6,15 @@ const emailRegex = RegExp(
   /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
 );
 
-class SignUp extends Component {
+class SignIn extends Component {
 
   constructor(props) {
     super(props);
 
     this.state = {
-      username: undefined,
       email: undefined,
       password: undefined,
       formError: {
-        username: '',
         email: '',
         password: ''
       },
@@ -29,9 +27,6 @@ class SignUp extends Component {
     const { name, value } = e.target;
     let formError = this.state.formError;
     switch (name) {
-      case 'username':
-        formError.username = value.length < 3 ? 'minimum 3 characters required' : '';
-        break;
       case 'email':
         formError.email = emailRegex.test(value) ? '' : 'invalid email address';
         break;
@@ -54,21 +49,27 @@ class SignUp extends Component {
   onSubmit = async (e) => {
     e.preventDefault();
 
-    let flag = false;
-    const { username, email, password } = this.state
+    const { email, password } = this.state
 
     if (this.formValid(this.state)) {
-      await axios.get('https://a2-ruize-nie.herokuapp.com/signup/' + email)
+
+      // await axios.get('https://a2-ruize-nie.herokuapp.com/signup/' + email)
+      await axios.get('http://localhost:5000/signup/' + email)
         .then(res => {
-          if (res.data.length !== 0) {
+          if (res.data.length === 0) {
             this.setState({
-              result: 'This email address has been token'
+              result: 'This email doesn\'t exist'
             })
           } else {
-            flag = true;
-            this.setState({
-              result: ''
-            })
+            if (password === res.data[0].password) {
+              this.setState({
+                email, password, login: true, result: ''
+              })
+            } else {
+              this.setState({
+                result: 'The password doesn\'t match'
+              })
+            }
           }
         });
     } else {
@@ -76,23 +77,10 @@ class SignUp extends Component {
         result: 'Please fill out all the entry and make sure you meet all the requirement'
       })
     }
-
-    if (flag) {
-      const user = {
-        username, email, password
-      }
-
-      axios.post('https://a2-ruize-nie.herokuapp.com/signup', user)
-        .then(res => console.log(res.data));
-
-      this.setState({
-        username, email, password, login: true
-      })
-    }
   }
 
   render() {
-    const { username, email, password, result, login, formError } = this.state
+    const { email, password, result, login, formError } = this.state
     if (login) {
       this.props.history.push({
         pathname: '/',
@@ -107,13 +95,13 @@ class SignUp extends Component {
         <section className="sign-content">
           <nav className="sign-nav">
             <p>
-              Already a member ?
-            <Link to="signin"> Sign In</Link>
+              Don't have an account ?
+            <Link to="signup"> Sign Up</Link>
             </p>
           </nav>
           <div className="sign-container">
             <form onSubmit={this.onSubmit} className="sign-form" noValidate>
-              <h2>Sign up to FindAbode</h2>
+              <h2>Sign in to FindAbode</h2>
               <div className="social-container">
                 <Link to="" className="facebook"><i className="fab fa-facebook-f"></i></Link>
                 <Link to="" className="google"
@@ -126,13 +114,6 @@ class SignUp extends Component {
               <hr className="divider" />
               {result.length > 0 && (
                 <span className="error-message">{result}</span>
-              )}
-              <label htmlFor="username">Username</label>
-              <input className={formError.username.length > 0 ? "input-field error" : "input-field"} type="text" name="username" id="username"
-                value={username || ''}
-                onChange={this.onChange} noValidate />
-              {formError.username.length > 0 && (
-                <span className="error-message">{formError.username}</span>
               )}
               <label htmlFor="email">Email Address</label>
               <input className={formError.email.length > 0 ? "input-field error" : "input-field"} type="email" name="email" id="emial"
@@ -153,11 +134,7 @@ class SignUp extends Component {
               {formError.password.length > 0 && (
                 <span className="error-message">{formError.password}</span>
               )}
-              <input
-                className="button"
-                type="submit"
-                value="Create Account"
-              />
+              <input className="button" type="submit" value="Login" />
             </form>
           </div>
         </section>
@@ -166,4 +143,4 @@ class SignUp extends Component {
   }
 }
 
-export default SignUp;
+export default SignIn;

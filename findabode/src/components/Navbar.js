@@ -9,7 +9,7 @@ class Navbar extends Component {
         <h1 className="nav-logo">FindAbode</h1>
         <nav>
           <ul className="nav-link">
-            <li><Link className="link" to=''>Apartments</Link></li>
+            <li><Link className="link" to='rooms'>Apartments</Link></li>
             <li><Link className="link" to=''>Services</Link></li>
             <li><Link className="link" to=''>Contact</Link></li>
             {

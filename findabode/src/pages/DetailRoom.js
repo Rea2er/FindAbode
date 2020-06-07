@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
 
-class Rooms extends Component {
+class DetailRoom extends Component {
   render() {
     return (
       <div>
-        Rooms pages
+        DetailRoom pages
       </div>
     )
   }
 }
-export default Rooms
+export default DetailRoom
