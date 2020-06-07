@@ -52,7 +52,8 @@ class SignIn extends Component {
     const { email, password } = this.state
 
     if (this.formValid(this.state)) {
-      await axios.get('http://localhost:5000/signup/' + email)
+
+      await axios.get(__dirname + '/signup/' + email)
         .then(res => {
           if (res.data.length === 0) {
             this.setState({

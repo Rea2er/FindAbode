@@ -58,7 +58,7 @@ class SignUp extends Component {
     const { username, email, password } = this.state
 
     if (this.formValid(this.state)) {
-      await axios.get('http://localhost:5000/signup/' + email)
+      await axios.get(__dirname + '/signup/' + email)
         .then(res => {
           if (res.data.length !== 0) {
             this.setState({
@@ -82,7 +82,7 @@ class SignUp extends Component {
         username, email, password
       }
 
-      axios.post('http://localhost:5000/signup', user)
+      axios.post(__dirname + '/signup', user)
         .then(res => console.log(res.data));
 
       this.setState({
