@@ -53,7 +53,7 @@ class SignIn extends Component {
 
     if (this.formValid(this.state)) {
 
-      await axios.get('http://a2-ruize-nie.herokuapp.com/signup/' + email)
+      await axios.get('https://a2-ruize-nie.herokuapp.com/signup/' + email)
         .then(res => {
           if (res.data.length === 0) {
             this.setState({
