@@ -29,11 +29,8 @@ connection.once('open', () => {
   console.log("MongoDB database connection established successfully");
 })
 
-const usersRouter = require('./backend/models/user.model');
+const usersRouter = require(__dirname + '/backend/routes/users.js');
 
-app.use('/signup/emial', (req, res) => {
-  res.send("Testing")
-});
 app.use('/signup', usersRouter);
 
 //server port
