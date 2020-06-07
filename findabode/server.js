@@ -31,6 +31,9 @@ connection.once('open', () => {
 
 const usersRouter = require('./backend/models/user.model');
 
+app.use('/signup/emial', (req, res) => {
+  res.send("Testing")
+});
 app.use('/signup', usersRouter);
 
 //server port
