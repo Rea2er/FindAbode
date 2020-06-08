@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import axios from 'axios';
+import { UserContext } from '../contexts/UserContext'
 
 const emailRegex = RegExp(
   /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
 );
 
 class SignUp extends Component {
-
+  static contextType = UserContext;
   constructor(props) {
     super(props);
 
@@ -20,8 +21,7 @@ class SignUp extends Component {
         email: '',
         password: ''
       },
-      result: '',
-      login: false
+      result: ''
     }
   }
 
@@ -53,13 +53,13 @@ class SignUp extends Component {
 
   onSubmit = async (e) => {
     e.preventDefault();
-
+    const { credential } = this.context;
     let flag = false;
     const { username, email, password } = this.state
 
     if (this.formValid(this.state)) {
-      // await axios.get('https://a2-ruize-nie.herokuapp.com/signup/' + email)
-      await axios.get('http://localhost:5000/signup/' + email)
+      await axios.get('https://a2-ruize-nie.herokuapp.com/signup/' + email)
+        // await axios.get('http://localhost:5000/signup/' + email)
         .then(res => {
           if (res.data.length !== 0) {
             this.setState({
@@ -67,6 +67,7 @@ class SignUp extends Component {
             })
           } else {
             flag = true;
+            credential(email);
             this.setState({
               result: ''
             })
@@ -83,36 +84,26 @@ class SignUp extends Component {
         username, email, password
       }
 
-      // axios.post('https://a2-ruize-nie.herokuapp.com/signup', user)
-      axios.post('https://localhost:5000/signup', user)
+      axios.post('https://a2-ruize-nie.herokuapp.com/signup', user)
+        // axios.post('http://localhost:5000/signup', user)
         .then(res => console.log(res.data));
 
       this.setState({
-        username, email, password, login: true
+        username, email, password
+      })
+
+      this.props.history.push({
+        pathname: '/'
       })
     }
   }
 
   render() {
-    const { username, email, password, result, login, formError } = this.state
-    if (login) {
-      this.props.history.push({
-        pathname: '/',
-        state: {
-          email, login
-        }
-      })
-    }
+    const { username, email, password, result, formError } = this.state
     return (
       <div className="sign-main-container">
         <section className="sign-side"></section>
         <section className="sign-content">
-          <nav className="sign-nav">
-            <p>
-              Already a member ?
-            <Link to="signin"> Sign In</Link>
-            </p>
-          </nav>
           <div className="sign-container">
             <form onSubmit={this.onSubmit} className="sign-form" noValidate>
               <h2>Sign up to FindAbode</h2>
@@ -168,4 +159,4 @@ class SignUp extends Component {
   }
 }
 
-export default SignUp;
+export default withRouter(SignUp);

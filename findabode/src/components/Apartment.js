@@ -1,8 +1,55 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom';
 import launch from '../images/launch.png'
+import { Link, withRouter } from 'react-router-dom'
 
 class Apartment extends Component {
+  state = {
+    featureRoom: [
+      {
+        id: '1',
+        subTitle: '3 beds 2 baths',
+        title: 'Modern home in the heart of historic Los Angeles',
+        desc: '$1,900.00 ',
+        descTail: '/ month',
+        review: '4/5 stars ',
+        reviewTail: '(based on 34 reviews)'
+      },
+      {
+        id: '2',
+        subTitle: '3 beds 2 baths',
+        title: 'Modern home in the heart of historic Los Angeles',
+        desc: '$1,900.00 ',
+        descTail: '/ month',
+        review: '4/5 stars ',
+        reviewTail: '(based on 34 reviews)'
+      },
+      {
+        id: '3',
+        subTitle: '3 beds 2 baths',
+        title: 'Modern home in the heart of historic Los Angeles',
+        desc: '$1,900.00 ',
+        descTail: '/ month',
+        review: '4/5 stars ',
+        reviewTail: '(based on 34 reviews)'
+      },
+      {
+        id: '4',
+        subTitle: '3 beds 2 baths',
+        title: 'Modern home in the heart of historic Los Angeles',
+        desc: '$1,900.00 ',
+        descTail: '/ month',
+        review: '4/5 stars ',
+        reviewTail: '(based on 34 reviews)'
+      }
+    ]
+  }
+  viewDetauk = (e, id) => {
+    e.preventDefault();
+    this.props.history.push({
+      pathname: '/rooms/' + id
+    })
+  }
+
   render() {
     return (
       <section className="section-apartments">
@@ -11,117 +58,21 @@ class Apartment extends Component {
         </div>
 
         <div className="apartments-containers">
-          <div>
-            <img className="apart" src={launch} alt="Lisbon" />
-            <h3>Lisbon</h3>
-            <div className="city-feature">
-              1600+ happy eaters
-          </div>
-            <div className="city-feature">
-              60+ top chefs
-          </div>
-            <div className="city-feature">
-              <Link to="">@omnifood_lx</Link>
+          {this.state.featureRoom.map((item, index) => {
+            return <div onClick={(e) => this.viewDetauk(e, item.id)} key={index} className="card-container">
+              <img src={launch} className="card-img" alt="aprts showcases" />
+              <div className="text-container">
+                <p className="text-subtitle">{item.subTitle}</p>
+                <p className="text-title">{item.title}</p>
+                <p className="text-desc">{item.desc}<span className="text-tiny">{item.descTail}</span></p>
+                <p className="text-review">{item.review}<span className="text-tiny">{item.reviewTail}</span></p>
+              </div>
             </div>
-          </div>
-          <div>
-            <img className="apart" src={launch} alt="Lisbon" />
-            <h3>Lisbon</h3>
-            <div className="city-feature">
-              1600+ happy eaters
-          </div>
-            <div className="city-feature">
-              60+ top chefs
-          </div>
-            <div className="city-feature">
-              <Link to="">@omnifood_lx</Link>
-            </div>
-          </div>
-          <div>
-            <img className="apart" src={launch} alt="Lisbon" />
-            <h3>Lisbon</h3>
-            <div className="city-feature">
-              1600+ happy eaters
-          </div>
-            <div className="city-feature">
-              60+ top chefs
-          </div>
-            <div className="city-feature">
-              <Link to="">@omnifood_lx</Link>
-            </div>
-          </div>
-          <div>
-            <img className="apart" src={launch} alt="Lisbon" />
-            <h3>Lisbon</h3>
-            <div className="city-feature">
-              1600+ happy eaters
-          </div>
-            <div className="city-feature">
-              60+ top chefs
-          </div>
-            <div className="city-feature">
-              <Link to="">@omnifood_lx</Link>
-            </div>
-          </div>
+          })}
         </div>
-
-        <div className="apartments-containers">
-          <div>
-            <img className="apart" src={launch} alt="Lisbon" />
-            <h3>Lisbon</h3>
-            <div className="city-feature">
-              1600+ happy eaters
-          </div>
-            <div className="city-feature">
-              60+ top chefs
-          </div>
-            <div className="city-feature">
-              <Link to="">@omnifood_lx</Link>
-            </div>
-          </div>
-          <div>
-            <img className="apart" src={launch} alt="Lisbon" />
-            <h3>Lisbon</h3>
-            <div className="city-feature">
-              1600+ happy eaters
-          </div>
-            <div className="city-feature">
-              60+ top chefs
-          </div>
-            <div className="city-feature">
-              <Link to="">@omnifood_lx</Link>
-            </div>
-          </div>
-          <div>
-            <img className="apart" src={launch} alt="Lisbon" />
-            <h3>Lisbon</h3>
-            <div className="city-feature">
-              1600+ happy eaters
-          </div>
-            <div className="city-feature">
-              60+ top chefs
-          </div>
-            <div className="city-feature">
-              <Link to="">@omnifood_lx</Link>
-            </div>
-          </div>
-          <div>
-            <img className="apart" src={launch} alt="Lisbon" />
-            <h3>Lisbon</h3>
-            <div className="city-feature">
-              1600+ happy eaters
-          </div>
-            <div className="city-feature">
-              60+ top chefs
-          </div>
-            <div className="city-feature">
-              <Link to="">@omnifood_lx</Link>
-            </div>
-          </div>
-        </div>
-        <button className="view-more">View More</button>
+        <Link to='/rooms'><button className="view-more">View More</button></Link>
       </section>
     )
   }
 }
-export default Apartment
+export default withRouter(Apartment)

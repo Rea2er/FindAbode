@@ -6,7 +6,7 @@ class Footer extends Component {
     return (
       <footer className="footer">
         <div className="footer-inner">
-          <div><i className="fas fa-globe fa-2x"></i> English (United States)</div>
+          <div><i className="fas fa-globe fa-2x"></i> English (Canada)</div>
           <ul>
             <li><Link to="" className="footer-link">Contact FindAbode</Link></li>
             <li><Link to="" className="footer-link">Privacy & cookies</Link></li>

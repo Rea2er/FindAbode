@@ -1,13 +1,14 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import axios from 'axios';
+import { UserContext } from '../contexts/UserContext'
 
 const emailRegex = RegExp(
   /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
 );
 
 class SignIn extends Component {
-
+  static contextType = UserContext;
   constructor(props) {
     super(props);
 
@@ -18,8 +19,7 @@ class SignIn extends Component {
         email: '',
         password: ''
       },
-      result: '',
-      login: false
+      result: ''
     }
   }
 
@@ -48,13 +48,13 @@ class SignIn extends Component {
 
   onSubmit = async (e) => {
     e.preventDefault();
-
+    const { credential } = this.context;
     const { email, password } = this.state
 
     if (this.formValid(this.state)) {
 
-      // await axios.get('https://a2-ruize-nie.herokuapp.com/signup/' + email)
-      await axios.get('http://localhost:5000/signup/' + email)
+      await axios.get('https://a2-ruize-nie.herokuapp.com/signup/' + email)
+        // await axios.get('http://localhost:5000/signup/' + email)
         .then(res => {
           if (res.data.length === 0) {
             this.setState({
@@ -63,7 +63,11 @@ class SignIn extends Component {
           } else {
             if (password === res.data[0].password) {
               this.setState({
-                email, password, login: true, result: ''
+                email, password, result: ''
+              })
+              credential(email);
+              this.props.history.push({
+                pathname: '/'
               })
             } else {
               this.setState({
@@ -80,25 +84,11 @@ class SignIn extends Component {
   }
 
   render() {
-    const { email, password, result, login, formError } = this.state
-    if (login) {
-      this.props.history.push({
-        pathname: '/',
-        state: {
-          email, login
-        }
-      })
-    }
+    const { email, password, result, formError } = this.state
     return (
       <div className="sign-main-container">
         <section className="sign-side"></section>
         <section className="sign-content">
-          <nav className="sign-nav">
-            <p>
-              Don't have an account ?
-            <Link to="signup"> Sign Up</Link>
-            </p>
-          </nav>
           <div className="sign-container">
             <form onSubmit={this.onSubmit} className="sign-form" noValidate>
               <h2>Sign in to FindAbode</h2>
@@ -143,4 +133,4 @@ class SignIn extends Component {
   }
 }
 
-export default SignIn;
+export default withRouter(SignIn);

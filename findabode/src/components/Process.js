@@ -32,7 +32,7 @@ class Process extends Component {
               </li>
               <li onClick={() => this.setState({
                 stepOne: false,
-                stepTwo: !stepTwo,
+                stepTwo: true,
                 stepThree: false,
                 stepFour: false,
                 stepFive: false,
@@ -43,7 +43,7 @@ class Process extends Component {
               <li onClick={() => this.setState({
                 stepOne: false,
                 stepTwo: false,
-                stepThree: !stepThree,
+                stepThree: true,
                 stepFour: false,
                 stepFive: false,
                 width: 's-three'
@@ -54,7 +54,7 @@ class Process extends Component {
                 stepOne: false,
                 stepTwo: false,
                 stepThree: false,
-                stepFour: !stepFour,
+                stepFour: true,
                 stepFive: false,
                 width: 's-four'
               })} className={stepFour ? "step step04 active" : "step step04"}>
@@ -65,7 +65,7 @@ class Process extends Component {
                 stepTwo: false,
                 stepThree: false,
                 stepFour: false,
-                stepFive: !stepFive,
+                stepFive: true,
                 width: 's-five'
               })} className={stepFive ? "step step05 active" : "step step05"}>
                 <div className="step-inner">STEP 5</div>
