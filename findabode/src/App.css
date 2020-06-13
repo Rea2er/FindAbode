@@ -151,32 +151,49 @@ label {
   text-decoration: none;
 }
 
+/* navigation */
 .nav-home {
   top: 0;
   left: 0;
   position: fixed;
   width: 100%;
-  position: fixed;
   background-color: #f3f3f3;
   z-index: 9999;
 }
 .nav-container {
   display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
   align-items: center;
+  width: 100%;
 }
+@media screen and (max-width: 500px) {
+  .nav-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 100%;
+  }
+}
+
 .nav-logo {
   cursor: pointer;
-  margin-left: 277px;
 }
 
 .nav-link {
-  margin-left: 700px;
   list-style: none;
+}
+
+nav {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 
 .nav-link li {
   display: inline-block;
-  padding: 0px 20px;
+  padding: 0 20px;
 }
 
 .link {
@@ -224,12 +241,13 @@ button:hover {
 
 .header-container {
   display: flex;
-  margin: 0 277px;
+  margin: 0 10%;
   margin-bottom: 20px;
   margin-top: 130px;
   justify-content: center;
   padding: 30px;
 }
+
 .header-text {
   margin-right: 50px;
   margin-top: 30px;
@@ -259,7 +277,8 @@ button:hover {
   cursor: pointer;
 }
 .launch {
-  margin-left: 50px;
+  margin-left: -40px;
+  min-width: 400px;
   width: 60%;
   height: 60%;
 }
@@ -267,7 +286,21 @@ button:hover {
   margin-top: 20px;
   margin-bottom: 60px;
 }
-
+@media screen and (max-width: 500px) {
+  .header-container {
+    display: flex;
+    flex-direction: column;
+    margin: 0 10%;
+    margin-bottom: 20px;
+    margin-top: 130px;
+    justify-content: center;
+    padding: 30px;
+  }
+  .launch {
+    width: 60%;
+    height: 60%;
+  }
+}
 p {
   font-size: 15px;
   line-height: 18px;
@@ -290,6 +323,7 @@ p {
   display: flex;
   margin: 80px 277px;
 }
+
 .feature-box {
   background-color: rgba(255, 255, 255, 0.8);
   font-size: 24px;
@@ -313,6 +347,24 @@ p {
 }
 .service-provide {
   padding-top: 140px;
+}
+
+@media screen and (max-width: 500px) {
+  .section-features {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+  .feature-box {
+    background-color: rgba(255, 255, 255, 0.8);
+    font-size: 24px;
+    margin-left: -130px;
+    padding: -40px;
+    margin-bottom: 30px;
+    text-align: center;
+    border-radius: 3px;
+    box-shadow: 0 24px 24px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s;
+  }
 }
 
 .process-wrapper {
@@ -502,7 +554,6 @@ p {
   justify-content: space-between;
   align-items: center;
 }
-
 .view-more {
   margin-top: 120px;
   padding: 18px 40px;
@@ -512,6 +563,29 @@ p {
   border: 2px solid rgb(139, 187, 178);
   font-weight: bold;
   cursor: pointer;
+}
+@media screen and (max-width: 500px) {
+  .section-apartments h1 {
+    margin-left: -150px;
+  }
+  .apartments-containers {
+    margin-left: -80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .view-more {
+    margin-left: -100px;
+    margin-top: 120px;
+    padding: 18px 40px;
+    background: transparent;
+    outline: none;
+    color: rgb(139, 187, 178);
+    border: 2px solid rgb(139, 187, 178);
+    font-weight: bold;
+    cursor: pointer;
+  }
 }
 .section-testimonials {
   background-image: linear-gradient(
@@ -533,6 +607,7 @@ p {
   justify-content: space-between;
   align-items: center;
 }
+
 blockquote {
   padding: 2%;
   font-style: italic;
@@ -562,6 +637,17 @@ cite img {
   margin-right: 10px;
   vertical-align: middle;
 }
+
+@media screen and (max-width: 500px) {
+  .testimonials {
+    font-size: 22px;
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    margin-left: 50px;
+  }
+}
+
 .links {
   background: #f2f2f2;
   color: #616161;
@@ -600,7 +686,22 @@ cite img {
   align-items: center;
   justify-content: space-between;
 }
-
+@media screen and (max-width: 500px) {
+  .links-inner {
+    margin-left: 200px;
+    display: flex;
+    flex-direction: column;
+  }
+  .footer-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px 0 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
 .footer div {
   margin-bottom: 20px;
   display: flex;
@@ -673,7 +774,12 @@ cite img {
   margin: 120px auto;
   width: 600px;
 }
-
+@media screen and (max-width: 500px) {
+  .search-container {
+    margin: 120px auto;
+    width: 90%;
+  }
+}
 .search-box {
   overflow: hidden;
   border: 1px solid #dfe1e5;

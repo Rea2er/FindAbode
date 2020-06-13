@@ -18,9 +18,9 @@ class Navbar extends Component {
               {
                 !login && <li><Link className="link" to='/signin'>Sign In</Link></li>}
             </ul>
+            {!login ? <Link className="link sign-up" to='/signup'><button>Sign Up</button></Link> :
+              <Link className="link sign-up" to='/profile'><button>Profile</button></Link>}
           </nav>
-          {!login ? <Link className="link sign-up" to='/signup'><button>Sign Up</button></Link> :
-            <Link className="link sign-up" to='/profile'><button>Profile</button></Link>}
         </div>
       </header >
     )
